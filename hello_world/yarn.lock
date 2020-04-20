@@ -141,10 +141,9 @@ duplexer3@^0.1.4:
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
   integrity sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=
 
-electron@^8.2.3:
-  version "8.2.3"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-8.2.3.tgz#b7d6a43bd9f3a2428c660dcd055a20034520e1ea"
-  integrity sha512-FJUp103c8yJBoAaj/QM/OBde57iJh95u1yGJBytMUXmLFSsx78LmNE03QN4XCODyzi76IEcasvUcK6scogRLbQ==
+"electron@https://github.com/castlabs/electron-releases#v8.2.3-wvvmp":
+  version "8.2.3-wvvmp"
+  resolved "https://github.com/castlabs/electron-releases#611e63296fc1324e2603e1e0a13c5b6e4cfbd4cf"
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"

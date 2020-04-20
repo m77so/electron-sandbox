@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "electron": "^8.2.3"
+    "electron": "https://github.com/castlabs/electron-releases#v8.2.3-wvvmp"
   },
   "main": "main.js",
   "scripts": {
