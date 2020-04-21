@@ -37,7 +37,16 @@
       player.addListener('not_ready', ({ device_id }) => {
         console.log('Device ID has gone offline', device_id);
       });
-
+      let is_playing = true;
+      const $btn = document.getElementById('btn1')
+      $btn.addEventListener('click', async () => {
+        if (is_playing) {
+          await player.pause();
+        }else{
+          await player.resume();
+        }
+        is_playing = !is_playing;
+      })
       // Connect to the player!
       player.connect();
     };
