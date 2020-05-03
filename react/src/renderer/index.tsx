@@ -10,6 +10,8 @@ import axios from 'axios';
 import credential from './credential'
 
 
+import Player from './components/player'
+
 ReactDOM.render(
   <App />,
   document.getElementById("app"),
@@ -84,32 +86,15 @@ async function startAuth() {
   return ret.data;
 }
 
-function Player(props){
 
-  const onPause = async (e) => {
-    
-    await props.spotifyPlayer.pause()
-  }
-
-  return (<div>
-    <button onClick={ onPause }>Pause</button>
-    </div>
-  )
-}
 function App(){
   const [spotifyToken, setSpotifyToken] = useState<string| undefined>();
-  const [player, setPlayer] = useState<Spotify.SpotifyPlayer | undefined>(undefined);
 
   const onLoginSpotify = async (e) => {
     await loadScript()
     const t = await startAuth()
     setSpotifyToken(t.access_token)
-    const p = new Spotify.Player({
-      name: 'Mu Player',
-      getOAuthToken: cb => { cb(t.access_token);}
-    })
-    p.connect()
-    setPlayer(p)
+
   }
 
   return(
@@ -122,7 +107,7 @@ function App(){
           }
         </li>
       </ul>
-      <Player spotifyToken={spotifyToken} spotifyPlayer={player} />
+      <Player spotifyToken={spotifyToken}/>
     </div>
   );
 }

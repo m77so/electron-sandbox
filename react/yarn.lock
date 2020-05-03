@@ -887,6 +887,11 @@
   resolved "https://registry.yarnpkg.com/@types/source-list-map/-/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
   integrity sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==
 
+"@types/spotify-api@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@types/spotify-api/-/spotify-api-0.0.3.tgz#b683476ad29d01cfce95bd3506c2c3aaa5c46b66"
+  integrity sha512-NV8GATMh2LmCqkODeuNQMYppOluthRdaJVfgLUrDX81azPGBRfE2Q75gwhaMJKbLN7U5c5/dMVPEMtG34+Mupg==
+
 "@types/spotify-web-playback-sdk@^0.1.7":
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/@types/spotify-web-playback-sdk/-/spotify-web-playback-sdk-0.1.7.tgz#44a9038f6a96a67a83b4495348e49c71b279f74f"
