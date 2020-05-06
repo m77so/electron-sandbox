@@ -16,7 +16,8 @@ function createMainWindow() {
         height: 600,
         webPreferences: {
             nodeIntegration: true,
-            plugins: true
+            plugins: true,
+            webSecurity: false,
         }
     })
 
@@ -56,7 +57,7 @@ app.on('window-all-closed', () => {
         app.quit()
     }
 })
-
+app.commandLine.appendSwitch('disable-site-isolation-trials')
 app.on('activate', () => {
     // on macOS it is common to re-create a window even after all windows have been closed
     if (mainWindow === null) {

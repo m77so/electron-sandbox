@@ -13,7 +13,6 @@ const SpotifyBrowser: React.FC<{ spotifyApi: SpotifyWebApi.SpotifyWebApiJs| null
     const [locale, localeDispatch] = useReducer(SpotifyBrowserLocale, initialState)
     const onSearchBoxKeyDown = async(e: React.KeyboardEvent<HTMLInputElement>) =>{
         if (e.keyCode === 13){
-
             localeDispatch({ type: 'search', q: searchBoxText })
         }
     }
@@ -40,7 +39,7 @@ const SpotifyBrowser: React.FC<{ spotifyApi: SpotifyWebApi.SpotifyWebApiJs| null
         setSearchBoxText(e.currentTarget.value)
     }
     return (<div>
-        <div><input type="text" value={searchBoxText} onChange={onSearchBoxChange} onKeyDown={onSearchBoxKeyDown}/></div>
+        <div>SPOTIFY SEARCH BOX: <input type="text" value={searchBoxText} onChange={onSearchBoxChange} onKeyDown={onSearchBoxKeyDown}/></div>
         {locale.pre.length > 0 &&<button onClick={()=>{localeDispatch({ type: 'backward', num: 1})}}>BACK</button>}
         {locale.next.length > 0 &&<button onClick={()=>{localeDispatch({ type: 'forward', num: 1})}}>NEXT</button>}
         {locale.current && locale.current.type === 'search' && <SpotifySearchResult res={searchResult} dispatch={localeDispatch} />}
