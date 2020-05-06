@@ -138,12 +138,16 @@ const playingStatusReducer = (state: PlayingState, action: PlayingStateActions) 
             }
             break
         case PlayingStateActionType.POP_QUEUE_AND_INSERT:
+            console.log(res)
             res = {
                 ...res,
-                queue: res.queue.slice(1),
                 history: res.history.concat(state.current_track),
                 current_track: {...res.queue[0], duration: 0, position: -999999, start_ready_for_next_track: false},
                 source: res.queue[0].source,
+            }
+            res = {
+                ...res,
+                queue: res.queue.slice(1),
             }
             break
         case PlayingStateActionType.SET_START_READY_FOR_NEXT_TRACK:

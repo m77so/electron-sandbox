@@ -40,35 +40,32 @@ const Player: React.FC<{ spotifyToken: string }> = ({ spotifyToken }) => {
             setSpotifyApi(null)
         }
     }, [spotifyToken])
-
     useEffect(() => {
         const f = () => {
             if (playingState.source === 'spotify')
                 psDispatch({ type: PlayingStateActionType.ADD_POSITION, milliseconds: 250, add_if_paused: false })
-            if (playingState.current_track.start_ready_for_next_track === false &&
-                playingState.is_obey_spotify_queue === false &&
-                playingState.queue.length > 0 &&
-                playingState.current_track.duration - playingState.current_track.position < 800) {
-                psDispatch({ type: PlayingStateActionType.SET_START_READY_FOR_NEXT_TRACK, value: true })
-                if (playingState.queue[0].source === 'spotify') {
-                    ; (async () => {
-                        await spotifyApi.play({
-                            position_ms: 0,
-                            uris: [playingState.queue[0].path],
-                        })
-                        psDispatch({ type: PlayingStateActionType.SET_START_READY_FOR_NEXT_TRACK, value: false })
-                        psDispatch({ type: PlayingStateActionType.POP_QUEUE_AND_INSERT })
-                    })()
-                } else if (playingState.queue[0].source === 'bilibili') {
-                    psDispatch({ type: PlayingStateActionType.POP_QUEUE_AND_INSERT })
-                }
-            }
-
         }
         const intervalId = setInterval(f, 250)
-        f()
-
         return () => { clearInterval(intervalId) }
+    }, [spotifyApi, playingState.source, playingState.current_track.path])
+    useEffect(() => {
+        if (playingState.current_track.start_ready_for_next_track === false &&
+            playingState.is_obey_spotify_queue === false &&
+            playingState.queue.length > 0 &&
+            playingState.current_track.duration - playingState.current_track.position < 800) {
+            psDispatch({ type: PlayingStateActionType.SET_START_READY_FOR_NEXT_TRACK, value: true })
+            if (playingState.queue[0].source === 'spotify') {
+                ; (async () => {
+                    await spotifyApi.play({
+                        position_ms: 0,
+                        uris: [playingState.queue[0].path],
+                    })
+                    psDispatch({ type: PlayingStateActionType.POP_QUEUE_AND_INSERT })
+                })()
+            } else if (playingState.queue[0].source === 'bilibili') {
+                psDispatch({ type: PlayingStateActionType.POP_QUEUE_AND_INSERT })
+            }
+        }
     }, [playingState, spotifyApi])
 
 

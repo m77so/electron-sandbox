@@ -5,7 +5,6 @@ const BILIBILI_ENDPOINT = 'https://api.bilibili.com'
 //https://api.bilibili.com/x/web-interface/view/detail?bvid= BV1ot4y1y7js
 export default {
     detail: async (bvId: string) => {
-        console.log(BILIBILI_ENDPOINT + `/x/web-interface/view/detail?bvid=${bvId}`)
         const r = await http<BilibiliApi.Detail>(new Request(BILIBILI_ENDPOINT + `/x/web-interface/view/detail?bvid=${bvId}`, {
             "credentials": "include",
             "headers": {
