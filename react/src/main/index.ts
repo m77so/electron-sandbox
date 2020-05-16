@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, session } from 'electron'
 import * as path from 'path'
 import { format as formatUrl, parse } from 'url'
 import express from 'express'
@@ -67,6 +67,9 @@ app.on('activate', () => {
 
 // create main BrowserWindow when electron is ready
 app.on('ready', () => {
+    // Clear x-guest-token for twitter saved on cookie
+    session.defaultSession.clearStorageData({storages:['cookies']})
+    
     mainWindow = createMainWindow()
 })
 

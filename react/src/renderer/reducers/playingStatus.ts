@@ -3,6 +3,7 @@ import { BilibiliPlayingStatus} from '../components/bilibiliIFrame'
 export enum MusicSource{
     SPOTIFY = "spotify",
     BILIBILI = "bilibili",
+    TWITTER = 'twitter',
 }
 interface Artist{
     name: string,
@@ -38,6 +39,7 @@ interface PlayingState {
 export enum PlayingStateActionType{
     SET_SPOTIFY_OBJECT,
     SET_BILIBILI_OBJECT,
+    SET_TWITTER_OBJECT,
     ADD_POSITION,
     SET_POSITION,
     ADD_TO_QUEUE,
@@ -47,12 +49,13 @@ export enum PlayingStateActionType{
 }
 type SetSpotifyAction = { type: PlayingStateActionType.SET_SPOTIFY_OBJECT, payload: Spotify.PlaybackState};
 type SetBilibiliAction = {type: PlayingStateActionType.SET_BILIBILI_OBJECT, payload: BilibiliPlayingStatus}
+type SetTwitterAction = {type: PlayingStateActionType.SET_TWITTER_OBJECT, payload: BilibiliPlayingStatus}
 type AddPositionAction = {type: PlayingStateActionType.ADD_POSITION, milliseconds: number, add_if_paused: boolean}
 type SetPositionAction = {type: PlayingStateActionType.SET_POSITION, milliseconds: number}
 export type AddToQueueAction = {type: PlayingStateActionType.ADD_TO_QUEUE, track: Song}
 type SetStartReadyForNextTrackAction = {type: PlayingStateActionType.SET_START_READY_FOR_NEXT_TRACK, value: boolean}
 type SimpleAction = {type: PlayingStateActionType.POP_QUEUE| PlayingStateActionType.POP_QUEUE_AND_INSERT}
-export type PlayingStateActions = SetSpotifyAction | SetBilibiliAction| AddPositionAction | AddToQueueAction | SetStartReadyForNextTrackAction | SimpleAction | SetPositionAction
+export type PlayingStateActions = SetSpotifyAction | SetBilibiliAction| SetTwitterAction| AddPositionAction | AddToQueueAction | SetStartReadyForNextTrackAction | SimpleAction | SetPositionAction
 export const initialState: PlayingState = {
     source: null,
     pause: true,
@@ -103,7 +106,8 @@ const playingStatusReducer = (state: PlayingState, action: PlayingStateActions) 
             }
             break
         case PlayingStateActionType.SET_BILIBILI_OBJECT:
-            if (state.source !== MusicSource.BILIBILI) return state
+        case PlayingStateActionType.SET_TWITTER_OBJECT:
+            if (state.source !== MusicSource.BILIBILI && state.source !==  MusicSource.TWITTER) return state
             res = {
                 ...res,
                 current_track:{
@@ -138,7 +142,6 @@ const playingStatusReducer = (state: PlayingState, action: PlayingStateActions) 
             }
             break
         case PlayingStateActionType.POP_QUEUE_AND_INSERT:
-            console.log(res)
             res = {
                 ...res,
                 history: res.history.concat(state.current_track),

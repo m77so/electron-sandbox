@@ -19,7 +19,7 @@ const BilibiliIFrame: React.FC<{ bvid: string, psDispatch: React.Dispatch<Playin
             }
 
             const playbutton = iframeEl.current.contentWindow.document.querySelector('#bofqi > div.bilibili-player-area > div.bilibili-player-video-control > div.bilibili-player-video-btn.bilibili-player-video-btn-start');
-
+            if (strToTime(dur) === 0) return
             psDispatch({
                 type: PlayingStateActionType.SET_BILIBILI_OBJECT,
                 payload: {
