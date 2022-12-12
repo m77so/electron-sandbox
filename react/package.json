@@ -29,7 +29,7 @@
     "axios": "^0.19.2",
     "base64-url": "^2.3.3",
     "electron": "https://github.com/castlabs/electron-releases#v8.2.3-wvvmp",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "react-spotify-web-playback": "^0.6.0",
     "spotify-web-api-js": "^1.4.0"
   }
